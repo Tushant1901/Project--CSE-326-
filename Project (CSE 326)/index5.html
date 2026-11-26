@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SAFEHAVEN | Emergency Shelter Allocation</title>
+
+    <link rel="stylesheet" href="style5.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo">
+            <div class="logo-icon">✚</div>
+
+            <div>
+                <h2>SAFEHAVEN</h2>
+                <small>Emergency Shelter Management</small>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <span class="live-status">● SYSTEM ONLINE</span>
+            <span class="authority">THE HEAD OF CONTROL</span>
+        </div>
+
+    </header>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="navbar">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#registration">Registration</a>
+        <a href="#shelters">Shelters</a>
+        <a href="#allocation">Allocation</a>
+        <a href="#control">Control Center</a>
+    </nav>
+
+
+    <main class="container">
+
+        <!-- WELCOME -->
+
+        <section class="welcome">
+
+            <div>
+                <span class="tag">EMERGENCY RESPONSE SYSTEM</span>
+
+                <h1>Shelter Allocation System</h1>
+
+                <p>
+                    Safe accommodation, organized allocation
+                    and emergency assistance for everyone.
+                </p>
+            </div>
+
+            <div class="welcome-icon">🏠</div>
+
+        </section>
+
+
+        <!-- DASHBOARD -->
+
+        <section id="dashboard">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Emergency Dashboard</h2>
+                    <p>Current shelter statistics</p>
+                </div>
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">🏠</div>
+                    <p>Total Shelters</p>
+                    <h2 id="totalShelters">0</h2>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">🛏️</div>
+                    <p>Available Beds</p>
+                    <h2 id="availableBeds">0</h2>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">👥</div>
+                    <p>Occupied Beds</p>
+                    <h2 id="occupiedBeds">0</h2>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon purple">📋</div>
+                    <p>Total Registrations</p>
+                    <h2 id="totalRegistrations">0</h2>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- REGISTRATION -->
+
+        <section id="registration" class="panel">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Registration Portal</h2>
+                    <p>Register individuals, families or animals.</p>
+                </div>
+
+                <span class="open-badge">OPEN FOR EVERYONE</span>
+            </div>
+
+
+            <div class="tabs">
+
+                <button class="tab active" onclick="showForm('individual',this)">
+                    Individual
+                </button>
+
+                <button class="tab" onclick="showForm('family',this)">
+                    Family
+                </button>
+
+                <button class="tab" onclick="showForm('animal',this)">
+                    Animals
+                </button>
+
+            </div>
+
+
+            <!-- INDIVIDUAL FORM -->
+
+            <form id="individualForm" class="registration-form">
+
+                <h3>Individual Registration</h3>
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label>Full Name</label>
+                        <input type="text" id="personName"
+                            placeholder="Enter full name" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Age</label>
+                        <input type="number" id="personAge"
+                            placeholder="Enter age" min="0" max="120" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Phone Number</label>
+                        <input type="tel" id="personPhone"
+                            placeholder="10-digit mobile number"
+                            pattern="[0-9]{10}" maxlength="10" required>
+                    </div>
+
+                </div>
+
+                <div class="terms">
+
+                    <input type="checkbox" id="individualTerms" required>
+
+                    <label for="individualTerms">
+                        I accept the
+                        <button type="button" class="text-button"
+                            onclick="openTerms()">
+                            Terms and Conditions
+                        </button>
+                    </label>
+
+                </div>
+
+                <button type="submit" class="primary-btn">
+                    Register & Allocate Shelter
+                </button>
+
+            </form>
+
+
+            <!-- FAMILY FORM -->
+
+            <form id="familyForm" class="registration-form hidden">
+
+                <h3>Family Registration</h3>
+
+                <div class="field">
+                    <label>Family Head Name</label>
+                    <input type="text" id="familyHead"
+                        placeholder="Enter family head name" required>
+                </div>
+
+                <div class="field">
+                    <label>Contact Phone Number</label>
+                    <input type="tel" id="familyPhone"
+                        placeholder="10-digit mobile number"
+                        pattern="[0-9]{10}" maxlength="10" required>
+                </div>
+
+                <div class="field">
+                    <label>Number of Family Members (Maximum 10)</label>
+
+                    <select id="familyCount" onchange="generateFamilyFields()">
+                        <option value="1">1 Member</option>
+                        <option value="2">2 Members</option>
+                        <option value="3">3 Members</option>
+                        <option value="4">4 Members</option>
+                        <option value="5">5 Members</option>
+                        <option value="6">6 Members</option>
+                        <option value="7">7 Members</option>
+                        <option value="8">8 Members</option>
+                        <option value="9">9 Members</option>
+                        <option value="10">10 Members</option>
+                    </select>
+                </div>
+
+                <div id="familyMembers" class="family-members"></div>
+
+                <div class="terms">
+                    <input type="checkbox" id="familyTerms" required>
+
+                    <label for="familyTerms">
+                        I accept the
+                        <button type="button" class="text-button"
+                            onclick="openTerms()">
+                            Terms and Conditions
+                        </button>
+                    </label>
+                </div>
+
+                <button type="submit" class="primary-btn">
+                    Register Family & Allocate
+                </button>
+
+            </form>
+
+
+            <!-- ANIMAL FORM -->
+
+            <form id="animalForm" class="registration-form hidden">
+
+                <h3>Animal Registration</h3>
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label>Owner Name</label>
+                        <input type="text" id="animalOwner"
+                            placeholder="Enter owner's name" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Phone Number</label>
+                        <input type="tel" id="animalPhone"
+                            placeholder="10-digit mobile number"
+                            pattern="[0-9]{10}" maxlength="10" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Animal Type</label>
+
+                        <select id="animalType">
+                            <option>Dog</option>
+                            <option>Cat</option>
+                            <option>Cow</option>
+                            <option>Goat</option>
+                            <option>Sheep</option>
+                            <option>Horse</option>
+                            <option>Other Domestic Animal</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Number of Animals</label>
+
+                        <input type="number" id="animalQuantity"
+                            min="1" max="50" value="1" required>
+                    </div>
+
+                </div>
+
+                <div class="terms">
+
+                    <input type="checkbox" id="animalTerms" required>
+
+                    <label for="animalTerms">
+                        I accept the
+                        <button type="button" class="text-button"
+                            onclick="openTerms()">
+                            Terms and Conditions
+                        </button>
+                    </label>
+
+                </div>
+
+                <button type="submit" class="primary-btn">
+                    Register Animals & Allocate
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- ALLOCATION RESULT -->
+
+        <section id="allocation" class="panel">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Latest Allocation</h2>
+                    <p>Recently assigned accommodation.</p>
+                </div>
+            </div>
+
+            <div id="allocationResult" class="empty-state">
+
+                <div class="empty-icon">🛏️</div>
+
+                <h3>No Recent Allocation</h3>
+
+                <p>Complete registration to receive a room and bed number.</p>
+
+            </div>
+
+        </section>
+
+
+        <!-- SHELTER LIST -->
+
+        <section id="shelters" class="panel">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Registered Shelters</h2>
+                    <p>Explore available emergency accommodation.</p>
+                </div>
+
+                <input type="text" id="shelterSearch"
+                    placeholder="Search shelter..."
+                    oninput="renderShelters()">
+
+            </div>
+
+            <div id="shelterList" class="shelter-grid"></div>
+
+        </section>
+
+
+        <!-- ALLOCATION RECORDS -->
+
+        <section id="records" class="panel">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Allocation Records</h2>
+                    <p>Recent registration and reservation records.</p>
+                </div>
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Shelter</th>
+                            <th>Room</th>
+                            <th>Bed</th>
+                            <th>Status</th>
+                            <th>Arrival Timer</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="recordsTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTROL CENTER -->
+
+        <section id="control" class="panel control-panel">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="tag">ADMINISTRATION</span>
+                    <h2>THE HEAD OF CONTROL</h2>
+                    <p>Manage emergency shelter facilities.</p>
+                </div>
+
+            </div>
+
+
+            <h3>Add New Shelter</h3>
+
+            <form id="shelterForm">
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label>Shelter Name</label>
+
+                        <select id="newShelterName" required>
+                            <option value="">Select River Name</option>
+                            <option>Ganga Shelter</option>
+                            <option>Yamuna Shelter</option>
+                            <option>Brahmaputra Shelter</option>
+                            <option>Godavari Shelter</option>
+                            <option>Narmada Shelter</option>
+                            <option>Kaveri Shelter</option>
+                            <option>Krishna Shelter</option>
+                            <option>Tapti Shelter</option>
+                            <option>Custom Shelter</option>
+                        </select>
+
+                    </div>
+
+                    <div class="field hidden" id="customNameField">
+                        <label>Custom Shelter Name</label>
+                        <input type="text" id="customShelterName">
+                    </div>
+
+                    <div class="field">
+                        <label>Location / Address</label>
+                        <input type="text" id="newShelterLocation"
+                            placeholder="Enter shelter location" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Shelter Category</label>
+
+                        <select id="newShelterCategory">
+                            <option value="human">Human Shelter</option>
+                            <option value="animal">Animal Shelter</option>
+                        </select>
+
+                    </div>
+
+                    <div class="field">
+                        <label>Number of Rooms</label>
+
+                        <input type="number" id="newShelterRooms"
+                            min="1" max="100" required
+                            placeholder="Enter room count">
+
+                    </div>
+
+                </div>
+
+                <p class="note">
+                    Each room contains 50 beds in this project prototype.
+                </p>
+
+                <button type="submit" class="primary-btn">
+                    + Add Shelter
+                </button>
+
+            </form>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- TERMS MODAL -->
+
+    <div id="termsModal" class="modal">
+
+        <div class="modal-content">
+
+            <button class="close-modal" onclick="closeTerms()">×</button>
+
+            <h2>Terms & Conditions</h2>
+
+            <p>Emergency Shelter Allocation System</p>
+
+            <div class="terms-content">
+
+                <ol>
+                    <li>Applicants must provide correct registration information.</li>
+
+                    <li>The system automatically allocates available accommodation.</li>
+
+                    <li>
+                        Applicants must reach their allocated shelter
+                        within 5 hours of allocation confirmation.
+                    </li>
+
+                    <li>
+                        If an applicant does not arrive within 5 hours,
+                        the reservation expires and the bed may be
+                        transferred to another person in need.
+                    </li>
+
+                    <li>
+                        If additional time is required because of an emergency,
+                        the applicant should contact THE HEAD OF CONTROL
+                        before the reservation expires.
+                    </li>
+
+                    <li>
+                        Families will be allocated in the same room
+                        whenever sufficient beds are available.
+                    </li>
+
+                    <li>
+                        Animal accommodation is managed separately.
+                    </li>
+
+                    <li>
+                        Registration information must be accurate.
+                    </li>
+
+                    <li>
+                        THE HEAD OF CONTROL manages shelter capacity
+                        and emergency allocation.
+                    </li>
+
+                </ol>
+
+            </div>
+
+            <button class="primary-btn" onclick="closeTerms()">
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- NOTIFICATION -->
+
+    <div id="toast" class="toast"></div>
+
+
+    <footer>
+
+        <h3>SAFEHAVEN</h3>
+
+        <p>
+            Emergency Shelter Allocation System
+        </p>
+
+        <p>Managed by THE HEAD OF CONTROL</p>
+
+        <small>Academic Project | Version 1.0</small>
+
+    </footer>
+
+
+    <script src="script5.js"></script>
+
+</body>
+
+</html>
